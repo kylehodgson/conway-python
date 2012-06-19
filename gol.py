@@ -16,31 +16,12 @@ class Board:
             self.grid[x][y]=random.randint(0,1)
 
    def display(self,p_x=None,p_y=None):
-   
-      highlight=False
-      if (p_x != None and p_y != None):
-         highlight=True
-      
-      #sys.stdout.write("\n    ")
-      #for i in range(len(self.grid)):
-      #   sys.stdout.write( " {0} ".format(i))
-      #sys.stdout.write("\n  - ")
-      
-      #for i in range(len(self.grid)):
-      #   sys.stdout.write( " - " )
-      #sys.stdout.write("\n")
-      
       for y in range(len(self.grid[0])):
-         #sys.stdout.write( "{0} | ".format(y) )
          for x in range(len(self.grid)):
-            if ( highlight and p_x == x and p_y == y):
-               sys.stdout.write("|{0}|".format(self.grid[x][y]))
+            if (self.grid[x][y]==1):
+               sys.stdout.write(" . ")
             else:
-               #sys.stdout.write(" {0} ".format(self.grid[x][y]))
-               if (self.grid[x][y]==1):
-                  sys.stdout.write(" . ")
-               else:
-                  sys.stdout.write("   ")
+               sys.stdout.write("   ")
          sys.stdout.write("\n")
       sys.stdout.write("\n")
 
@@ -67,7 +48,7 @@ class Board:
          self.nextgrid[x] = {}
          for y in range(len(self.grid[0])):
             self.nextgrid[x][y]=0
-
+      
       for y in range(len(self.grid[0])):
          for x in range(len(self.grid)):
             count = self.get_live_neighbor_count(x,y)
@@ -76,6 +57,7 @@ class Board:
                self.nextgrid[x][y]=1
             elif ( alive == 0 and count == 3 ) :
                self.nextgrid[x][y]=1
+      
       self.grid=self.nextgrid         
       self.nextgrid={}
 
