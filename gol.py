@@ -16,8 +16,8 @@ class Board:
             self.grid[x][y]=random.randint(0,1)
 
    def display(self):
-      for y in range(len(self.grid[0])):
-         for x in range(len(self.grid)):
+      for y in range(self.get_col_count()):
+         for x in range(self.get_row_count()):
             if (self.grid[x][y]==1):
                sys.stdout.write(" . ")
             else:
@@ -26,7 +26,7 @@ class Board:
       sys.stdout.write("\n")
 
    def list_all_coords(self):
-      for x in range(len(self.grid)):
+      for x in range(self.get_row_count()):
          for y in range(len(self.grid[x])):
             print "x: {0} y: {1} value: {2}".format(x, y, self.grid[x][y])
 
@@ -36,7 +36,7 @@ class Board:
          for y in range(p_y-1,p_y+2):
             if ( p_x == x and p_y == y ):  # skip myself
                live_neighbors += 0
-            elif (x < 0 or y < 0 or x > len(self.grid)-1 or y > len(self.grid[0])-1 ):  # edge detection
+            elif (x < 0 or y < 0 or x > self.get_row_count() -1 or y > self.get_col_count() -1 ):  # edge detection
                live_neighbors += 0
             else:
                if (self.grid[x][y]==1):
@@ -52,13 +52,13 @@ class Board:
          self.nextgrid[x][y]=1
    
    def next_turn(self):
-      for x in range(len(self.grid)):
+      for x in range(self.get_row_count()):
          self.nextgrid[x] = {}
-         for y in range(len(self.grid[0])):
+         for y in range(self.get_col_count()):
             self.nextgrid[x][y]=0
       
-      for y in range(len(self.grid[0])):
-         for x in range(len(self.grid)):
+      for y in range(self.get_col_count()):
+         for x in range(self.get_row_count()):
             self.process_rules(x,y)
       
       self.grid=self.nextgrid         
