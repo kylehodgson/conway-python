@@ -45,10 +45,10 @@ class Board:
 
    def process_rules(self,x,y):
       count = self.get_live_neighbor_count(x,y)
-      alive = self.grid[x][y]
-      if (alive == 1 and count >=2 and count <= 3) :
+      alive = self.grid[x][y]==1
+      if (alive == True and count >=2 and count <= 3):
          self.nextgrid[x][y]=1
-      elif ( alive == 0 and count == 3 ) :
+      elif ( alive == False and count == 3 ):
          self.nextgrid[x][y]=1
    
    def next_turn(self):
