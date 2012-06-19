@@ -15,7 +15,7 @@ class Board:
          for y in range(p_y):
             self.grid[x][y]=random.randint(0,1)
 
-   def display(self,p_x=None,p_y=None):
+   def display(self):
       for y in range(len(self.grid[0])):
          for x in range(len(self.grid)):
             if (self.grid[x][y]==1):
