@@ -43,7 +43,7 @@ class Board:
                   live_neighbors += 1
       return live_neighbors
 
-   def process_rules(self,p_x,p_y):
+   def process_rules(self,x,y):
       count = self.get_live_neighbor_count(x,y)
       alive = self.grid[x][y]
       if (alive == 1 and count >=2 and count <= 3) :
@@ -59,7 +59,7 @@ class Board:
       
       for y in range(len(self.grid[0])):
          for x in range(len(self.grid)):
-            process_rules(x,y)
+            self.process_rules(x,y)
       
       self.grid=self.nextgrid         
       self.nextgrid={}
