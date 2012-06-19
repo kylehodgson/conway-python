@@ -42,8 +42,16 @@ class Board:
                if (self.grid[x][y]==1):
                   live_neighbors += 1
       return live_neighbors
-               
-   def process_rules(self):
+
+   def process_rules(self,p_x,p_y):
+      count = self.get_live_neighbor_count(x,y)
+      alive = self.grid[x][y]
+      if (alive == 1 and count >=2 and count <= 3) :
+         self.nextgrid[x][y]=1
+      elif ( alive == 0 and count == 3 ) :
+         self.nextgrid[x][y]=1
+   
+   def next_turn(self):
       for x in range(len(self.grid)):
          self.nextgrid[x] = {}
          for y in range(len(self.grid[0])):
@@ -51,12 +59,7 @@ class Board:
       
       for y in range(len(self.grid[0])):
          for x in range(len(self.grid)):
-            count = self.get_live_neighbor_count(x,y)
-            alive = self.grid[x][y]
-            if (alive == 1 and count >=2 and count <= 3) :
-               self.nextgrid[x][y]=1
-            elif ( alive == 0 and count == 3 ) :
-               self.nextgrid[x][y]=1
+            process_rules(x,y)
       
       self.grid=self.nextgrid         
       self.nextgrid={}
@@ -69,5 +72,5 @@ while (True):
    b.display()
    print "{0} iterations.".format(iterations)
    time.sleep(1)
-   b.process_rules()
+   b.next_turn()
    os.system("clear")
