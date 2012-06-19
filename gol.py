@@ -64,6 +64,13 @@ class Board:
       self.grid=self.nextgrid         
       self.nextgrid={}
 
+   def get_row_count(self):
+      return len(self.grid)
+
+   def get_col_count(self):
+      if ( len(self.grid) > 0 ):
+         return len(self.grid[0])
+      
 iterations=0
 os.system("clear")      
 b = Board(40,40)
