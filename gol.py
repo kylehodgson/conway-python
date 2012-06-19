@@ -69,5 +69,5 @@ while (True):
    b.display()
    print "{0} iterations.".format(iterations)
    time.sleep(1)
-   os.system("clear")
    b.process_rules()
+   os.system("clear")
